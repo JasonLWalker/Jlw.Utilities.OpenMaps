@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SixLabors.ImageSharp.Web" Version="1.0.0-beta0009" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.0-preview3.19551.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jlw.Utilities.OpenMaps\Jlw.Utilities.OpenMaps.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Jlw.Standard.Utilities.Data">
+      <HintPath>..\..\bin\netstandard2.0\Jlw.Standard.Utilities.Data.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
