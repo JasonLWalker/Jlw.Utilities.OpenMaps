@@ -18,7 +18,7 @@ jobs:
       with:
         dotnet-version: 3.1
     - name: Install private package repo
-      run: dotnet nuget add source https://nuget.pkg.github.com/${{ secrets.NUGET_USER }}/index.json --name=github --username=${{ secrets.NUGET_USER }} --password=${{ secrets.NUGET_KEY }}
+      run: dotnet nuget add source https://nuget.pkg.github.com/${{ secrets.NUGET_USER }}/index.json --store-password-in-clear-text --name=github --username=${{ secrets.NUGET_USER }} --password=${{ secrets.NUGET_KEY }}
     - name: Install dependencies
       run: dotnet restore
     - name: Build with dotnet
