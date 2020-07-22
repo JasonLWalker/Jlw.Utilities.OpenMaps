@@ -1,6 +1,10 @@
 using System;
 using System.Net;
+using Jlw.Standard.Utilities.Data.DbUtility;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Jlw.Standard.Utilities.Testing;
+using Jlw.Standard.Utilities.Testing.DataSources;
+
 
 namespace Jlw.Utilities.OpenMaps.Tests.UnitTests.TileRendererTests
 {
@@ -14,7 +18,7 @@ namespace Jlw.Utilities.OpenMaps.Tests.UnitTests.TileRendererTests
             string engine = "Mapnik";
             string template = "https://tile.openstreetmap.org/{0}/{1}/{2}.png";
             string expected = String.Format(template, zoom, x, y);
-            TileEngine sut = new TileEngine(engine);
+            TileEngine sut = new TileEngine(engine, null, new ModularDbClient<NullDbConnection, NullDbCommand, NullDbParameter>());
             var result = sut.FetchTile(x, y, zoom);
             Assert.AreEqual(expected, result.Source);
             Assert.AreEqual(HttpStatusCode.OK, result.StatusCode);

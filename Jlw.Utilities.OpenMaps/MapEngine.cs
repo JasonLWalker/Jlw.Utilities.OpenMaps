@@ -24,12 +24,13 @@ namespace Jlw.Utilities.OpenMaps
         private bool _useCache = false;
         protected static Regex rxMarkers = new Regex(@"^\s*(-?[0-9]+[\\.]?[0-9]*)\s*,\s*(-?[0-9]+[\\.]?[0-9]*)\s*[,]?([a-z0-9\\-]*)", RegexOptions.IgnorePatternWhitespace | RegexOptions.IgnoreCase);
         protected static Regex rxSize = new Regex(@"^([0-9]{1,4})x([0-9]{1,4})$", RegexOptions.IgnorePatternWhitespace | RegexOptions.IgnoreCase);
-        protected static IModularDbClient _dbClient = new ModularSqlClient();
+        protected static IModularDbClient _dbClient;
 
-        public MapEngine(string tileEngine = null, string connString=null)
+        public MapEngine(string tileEngine = null, string connString=null, IModularDbClient dbClient=null)
         {
             _tileTemplate = TileSources.Sources.FirstOrDefault(kvp=> kvp.Key.Equals(tileEngine ?? "", StringComparison.InvariantCultureIgnoreCase)).Value;
             _connString = connString;
+            _dbClient = dbClient ?? new ModularDbClient<NullDbConnection, NullDbCommand, NullDbParameter>();
         }
 
         protected double LonToTile(double lon, int zoom)

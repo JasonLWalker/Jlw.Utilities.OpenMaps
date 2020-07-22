@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Jlw.Standard.Utilities.Data" Version="2.0.7507.30674" />
+    <PackageReference Include="Jlw.Standard.Utilities.Data" Version="2.0.7508.27310" />
     <PackageReference Include="SixLabors.Core" Version="1.0.0-beta0008" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta0009" />
   </ItemGroup>

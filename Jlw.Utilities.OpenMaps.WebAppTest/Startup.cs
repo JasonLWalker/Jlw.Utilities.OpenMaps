@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -7,6 +8,7 @@ using System.Net.Mime;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Jlw.Standard.Utilities.Data;
+using Jlw.Standard.Utilities.Data.DbUtility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -25,6 +27,7 @@ namespace Jlw.Utilities.OpenMaps.WebAppTest
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IModularDbClient>(new ModularDbClient<SqlConnection, SqlCommand, SqlParameter>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,7 +69,7 @@ namespace Jlw.Utilities.OpenMaps.WebAppTest
                             engine = "osm";
                             break;
                     }
-                    var renderer = new TileEngine(engine, "data source=SPSDB4.sps.org;Integrated Security=SSPI;Initial Catalog=SPS_WEB_UTILITIES;");
+                    var renderer = new TileEngine(engine, "data source=SPSDB4.sps.org;Integrated Security=SSPI;Initial Catalog=SPS_WEB_UTILITIES;", app.ApplicationServices.GetRequiredService<IModularDbClient>());
                     int x = DataUtility.ParseInt(context.GetRouteValue("x"));
                     int y = DataUtility.ParseInt(context.GetRouteValue("y"));
                     int zoom = DataUtility.ParseInt(context.GetRouteValue("zoom"));
@@ -92,7 +95,7 @@ namespace Jlw.Utilities.OpenMaps.WebAppTest
                     size.Height = Math.Max(Math.Min(1024, size.Height), 1);
                     size.Width = Math.Max(Math.Min(1024, size.Width), 1);
                     
-                    var renderer = new MapEngine("wikimedia", "data source=SPSDB4.sps.org;Integrated Security=SSPI;Initial Catalog=SPS_WEB_UTILITIES;");
+                    var renderer = new MapEngine("wikimedia", "data source=SPSDB4.sps.org;Integrated Security=SSPI;Initial Catalog=SPS_WEB_UTILITIES;", app.ApplicationServices.GetRequiredService<IModularDbClient>());
                     var map = renderer.FetchMapImage(center.Y, center.X, zoom, size.Width, size.Height);
 
                     string sMarkers = context.Request.Query.FirstOrDefault(kvp => kvp.Key.Equals("markers", StringComparison.InvariantCultureIgnoreCase)).Value.ToString() ?? ""; //"37.20980175586231,-93.27173709668480,fa-marker-red|37.20980175586231,-93.27173709668480,fa-marker-blue";

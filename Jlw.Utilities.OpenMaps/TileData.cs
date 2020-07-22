@@ -27,23 +27,26 @@ namespace Jlw.Utilities.OpenMaps
         public int Zoom => _zoom;
 
         protected string _connString;
-        protected static IModularDbClient _dbClient = new ModularSqlClient();
+        protected static IModularDbClient _dbClient;
         protected bool _useCache = false;
 
 
-        public TileData(string source, HttpStatusCode statusCode = HttpStatusCode.Ambiguous, string status="", byte[] imageData = null)  : base(source, statusCode, status, imageData)
+        public TileData(string source, HttpStatusCode statusCode = HttpStatusCode.Ambiguous, string status="", byte[] imageData = null, string connString=null, IModularDbClient dbClient = null)  : base(source, statusCode, status, imageData)
         {
+            InitDatabase(connString, dbClient);
         }
 
-        public TileData(int x, int y, int zoom, string engine = "Osm", string connString=null) : base("")
+        public TileData(int x, int y, int zoom, string engine = "Osm", string connString=null, IModularDbClient dbClient = null) : base("")
         {
-            _connString = connString;
+            InitDatabase(connString, dbClient);
             Source = GetTileUrl(x, y, zoom, engine);
             FetchTileDataByUrl(x, y, zoom, Source);
         }
 
-        public TileData(IDataRecord o) : base("")
+        public TileData(IDataRecord o, string connString=null, IModularDbClient dbClient = null) : base("")
         {
+            InitDatabase(connString, dbClient);
+
             if (o == null)
                 return;
 
@@ -54,6 +57,12 @@ namespace Jlw.Utilities.OpenMaps
             _y = DataUtility.ParseInt(o, "CoordY");
             _zoom = DataUtility.ParseInt(o, "Zoom");
             SetImageData((byte[])o["ImageData"]);
+        }
+
+        protected void InitDatabase(string connString=null, IModularDbClient dbClient=null)
+        {
+            _dbClient = dbClient ?? new ModularDbClient<NullDbConnection, NullDbCommand, NullDbParameter>();
+            _connString = connString;
         }
 
         internal void FetchTileDataByUrl(int x, int y, int zoom, string url)

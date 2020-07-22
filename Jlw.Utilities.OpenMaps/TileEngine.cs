@@ -16,17 +16,17 @@ namespace Jlw.Utilities.OpenMaps
         private IModularDbClient _dbClient;
         private bool _useCache = false;
 
-        public TileEngine(string tileEngine = null, string connString = null )
+        public TileEngine(string tileEngine = null, string connString = null, IModularDbClient dbClient = null )
         {
             _tileTemplate = TileSources.Sources.FirstOrDefault(kvp=> kvp.Key.Equals(tileEngine ?? "", StringComparison.InvariantCultureIgnoreCase)).Value;
             _connString = connString;
-            _dbClient = new ModularSqlClient();
+            _dbClient = dbClient ?? new ModularDbClient<NullDbConnection, NullDbCommand, NullDbParameter>();
             
         }
 
         public TileData FetchTile(int x, int y, int zoom)
         {
-            return new TileData(x, y, zoom, _tileTemplate, _connString);
+            return new TileData(x, y, zoom, _tileTemplate, _connString, _dbClient);
         }
 
 
