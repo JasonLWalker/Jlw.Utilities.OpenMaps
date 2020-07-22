@@ -40,7 +40,7 @@ jobs:
 
     - name: Push package to NuGet
       run: |
-           for f in ./Jlw.Standard.Utilities.WebApiUtility/bin/Release/*.nupkg
+           for f in ./Jlw..Utilities.OpenMaps/bin/Release/*.nupkg
            do
              curl -vX PUT -u "${{ secrets.NUGET_USER }}:${{ secrets.NUGET_KEY }}" -F package=@$f ${{ secrets.NUGET_REPO }}
            done
