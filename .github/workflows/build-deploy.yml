@@ -17,7 +17,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1
-    - name: Install private package repo
+    - name: Configure private package repo
       run: dotnet nuget add source https://nuget.pkg.github.com/${{ secrets.NUGET_USER }}/index.json --store-password-in-clear-text --name=github --username=${{ secrets.NUGET_USER }} --password=${{ secrets.NUGET_KEY }}
     - name: Install dependencies
       run: dotnet restore
@@ -33,16 +33,10 @@ jobs:
     - uses: actions/checkout@v2
       with:
         dotnet-version: 3.1
-    - name: Install private package repo
+    - name: Configure private package repo
       run: dotnet nuget add source https://nuget.pkg.github.com/${{ secrets.NUGET_USER }}/index.json --store-password-in-clear-text --name=github --username=${{ secrets.NUGET_USER }} --password=${{ secrets.NUGET_KEY }}
     - name: Pack NuGet package
       run: dotnet pack --configuration Release
 
     - name: Push package to NuGet
-      run: |
-           for f in ./Jlw.Utilities.OpenMaps/bin/Release/*.nupkg
-           do
-             curl -vX PUT -u "${{ secrets.NUGET_USER }}:${{ secrets.NUGET_KEY }}" -F package=@$f ${{ secrets.NUGET_REPO }}
-           done
-      shell: bash
-      
+      run: dotnet nuget push -s github **/*.nupkg -k ${{ secrets.NUGET_KEY }}
