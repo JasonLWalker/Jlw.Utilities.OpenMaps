@@ -12,11 +12,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.0
+        dotnet-version: '8.x'
     - name: Configure private package repo
       run: dotnet nuget add source https://nuget.pkg.github.com/${{ secrets.NUGET_USER }}/index.json --store-password-in-clear-text --name=github --username=${{ secrets.NUGET_USER }} --password=${{ secrets.NUGET_KEY }}
     - name: Install dependencies
@@ -30,9 +30,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
-        dotnet-version: 3.1
+        dotnet-version: '8.x'
     - name: Configure private package repo
       run: dotnet nuget add source https://nuget.pkg.github.com/${{ secrets.NUGET_USER }}/index.json --store-password-in-clear-text --name=github --username=${{ secrets.NUGET_USER }} --password=${{ secrets.NUGET_KEY }}
     - name: Pack NuGet package
