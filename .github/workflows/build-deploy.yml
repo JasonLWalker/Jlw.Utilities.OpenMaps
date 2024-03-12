@@ -16,7 +16,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1
+        dotnet-version: 8.0
     - name: Configure private package repo
       run: dotnet nuget add source https://nuget.pkg.github.com/${{ secrets.NUGET_USER }}/index.json --store-password-in-clear-text --name=github --username=${{ secrets.NUGET_USER }} --password=${{ secrets.NUGET_KEY }}
     - name: Install dependencies

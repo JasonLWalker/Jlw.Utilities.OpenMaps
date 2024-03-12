@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.352
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jlw.Utilities.OpenMaps", "Jlw.Utilities.OpenMaps\Jlw.Utilities.OpenMaps.csproj", "{85069573-B42E-49B3-BA52-7F4B495AA517}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jlw.Utilities.OpenMaps.Tests", "Jlw.Utilities.OpenMaps.Tests\Jlw.Utilities.OpenMaps.Tests.csproj", "{AFC72B17-74DE-415A-8A62-1C9675FFAE44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jlw.Utilities.OpenMaps.Tests", "Jlw.Utilities.OpenMaps.Tests\Jlw.Utilities.OpenMaps.Tests.csproj", "{AFC72B17-74DE-415A-8A62-1C9675FFAE44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jlw.Utilities.OpenMaps.WebAppTest", "Jlw.Utilities.OpenMaps.WebAppTest\Jlw.Utilities.OpenMaps.WebAppTest.csproj", "{73735620-0005-420D-BE4D-26B926B838F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jlw.Utilities.OpenMaps.WebAppTest", "Jlw.Utilities.OpenMaps.WebAppTest\Jlw.Utilities.OpenMaps.WebAppTest.csproj", "{73735620-0005-420D-BE4D-26B926B838F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
