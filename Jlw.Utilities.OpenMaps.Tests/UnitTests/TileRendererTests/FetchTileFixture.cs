@@ -1,9 +1,9 @@
 using System;
 using System.Net;
-using Jlw.Standard.Utilities.Data.DbUtility;
+using Jlw.Utilities.Data.DbUtility;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Jlw.Standard.Utilities.Testing;
-using Jlw.Standard.Utilities.Testing.DataSources;
+using Jlw.Utilities.Testing;
+using Jlw.Utilities.Testing.DataSources;
 
 
 namespace Jlw.Utilities.OpenMaps.Tests.UnitTests.TileRendererTests

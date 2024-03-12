@@ -7,8 +7,8 @@ using System.Net;
 using System.Net.Mime;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Jlw.Standard.Utilities.Data;
-using Jlw.Standard.Utilities.Data.DbUtility;
+using Jlw.Utilities.Data;
+using Jlw.Utilities.Data.DbUtility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -103,7 +103,11 @@ namespace Jlw.Utilities.OpenMaps.WebAppTest
                     try
                     {
                         renderer.OverlayMarkers(map, center.Y, center.X, zoom, sMarkers);
-                    } catch (Exception ex) {}
+                    }
+                    catch
+                    {
+                        // Do nothing
+                    }
 
 //                    var marker = new MapMarker(sMarkers);
                     //await context.Response.WriteAsync($"x: {p.X}, y:{p.Y}\n");

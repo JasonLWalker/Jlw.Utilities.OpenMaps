@@ -17,9 +17,9 @@ namespace Jlw.Utilities.OpenMaps
         {
             get
             {
-                if(ImageData.TryGetSinglePixelSpan(out var pixelSpan))
+                if(ImageData.DangerousTryGetSinglePixelMemory(out var pixelSpan))
                 {
-                     return MemoryMarshal.AsBytes(pixelSpan).ToArray();
+                     return MemoryMarshal.AsBytes(pixelSpan.Span).ToArray();
                 }
                 return new byte[]{};
             }
@@ -42,7 +42,7 @@ namespace Jlw.Utilities.OpenMaps
 
         public void SetImageData(byte[] data)
         {
-            ImageData = Image.Load(data);
+            ImageData = Image.Load<Rgba32>(data);
         } 
 
         public void SetImageData(Image<Rgba32> data)

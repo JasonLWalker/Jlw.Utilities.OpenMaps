@@ -3,7 +3,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
-using Jlw.Standard.Utilities.Data.DbUtility;
+using Jlw.Utilities.Data.DbUtility;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 

@@ -4,15 +4,15 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
-using Jlw.Standard.Utilities.Data;
-using Jlw.Standard.Utilities.Data.DbUtility;
+using Jlw.Utilities.Data;
+using Jlw.Utilities.Data.DbUtility;
 using SixLabors.ImageSharp;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp.Formats.Png;
 using SixLabors.ImageSharp.Advanced;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.Primitives;
+using SixLabors;
 
 namespace Jlw.Utilities.OpenMaps
 {
@@ -107,7 +107,7 @@ namespace Jlw.Utilities.OpenMaps
                 Status = ((HttpWebResponse) wex.Response)?.StatusDescription ?? "";
                 SetImageData(GetErrorTile(x, y, zoom));
             }
-            catch (Exception ex)
+            catch 
             {
                 Source = request.RequestUri.AbsoluteUri;
                 StatusCode = HttpStatusCode.Ambiguous;
@@ -118,7 +118,7 @@ namespace Jlw.Utilities.OpenMaps
 
         internal bool FetchTileFromCache(string url)
         {
-            TileData result = null;
+            //TileData result = null;
 
             StatusCode = HttpStatusCode.Ambiguous;
             Status = "";

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -9,9 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Jlw.Standard.Utilities.Data" Version="2.0.7508.27310" />
-    <PackageReference Include="SixLabors.Core" Version="1.0.0-beta0008" />
-    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta0009" />
+    <PackageReference Include="Jlw.Utilities.Data" Version="4.8.8531.6086" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="2.1.7" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
   </ItemGroup>
 
   <Target Name="ReadPackageVersionFromOutputAssembly" DependsOnTargets="Build">

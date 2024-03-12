@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Jlw.Standard.Utilities.Data;
+using Jlw.Utilities.Data;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 
@@ -50,8 +50,8 @@ namespace Jlw.Utilities.OpenMaps
             if (string.IsNullOrWhiteSpace(base64))
                 return;
 
-            ImageData = Image.Load(Convert.FromBase64String(base64));
-            ShadowData = Image.Load(Convert.FromBase64String(ImageDataList.FirstOrDefault(kvp=>kvp.Key.Equals("fa-marker-shadow", StringComparison.InvariantCultureIgnoreCase)).Value));
+            ImageData = Image.Load<Rgba32>(Convert.FromBase64String(base64));
+            ShadowData = Image.Load<Rgba32>(Convert.FromBase64String(ImageDataList.FirstOrDefault(kvp=>kvp.Key.Equals("fa-marker-shadow", StringComparison.InvariantCultureIgnoreCase)).Value));
         }
 
     }

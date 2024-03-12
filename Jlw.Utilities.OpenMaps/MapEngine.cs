@@ -4,8 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
-using Jlw.Standard.Utilities.Data;
-using Jlw.Standard.Utilities.Data.DbUtility;
+using Jlw.Utilities.Data;
+using Jlw.Utilities.Data.DbUtility;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing.Processing;
@@ -18,10 +18,10 @@ namespace Jlw.Utilities.OpenMaps
     {
         private string _tileTemplate;
         private int _tileSize = 256;
-        private int _maxWidth = 1024;
-        private int _maxHeight = 1024;
+        //private int _maxWidth = 1024;
+        //private int _maxHeight = 1024;
         private string _connString;
-        private bool _useCache = false;
+        //private bool _useCache = false;
         protected static Regex rxMarkers = new Regex(@"^\s*(-?[0-9]+[\\.]?[0-9]*)\s*,\s*(-?[0-9]+[\\.]?[0-9]*)\s*[,]?([a-z0-9\\-]*)", RegexOptions.IgnorePatternWhitespace | RegexOptions.IgnoreCase);
         protected static Regex rxSize = new Regex(@"^([0-9]{1,4})x([0-9]{1,4})$", RegexOptions.IgnorePatternWhitespace | RegexOptions.IgnoreCase);
         protected static IModularDbClient _dbClient;
@@ -109,7 +109,7 @@ namespace Jlw.Utilities.OpenMaps
                 int rXOffset = 8;
                 int rY = 20;
                 int fontSize = 8;
-                ctx.FillPolygon(new ShapeGraphicsOptions(), new SolidBrush(Color.FromRgba(0xFF, 0xFF, 0xFF, 0x88)), new PointF[]{new PointF(width - rX,height -rY), new PointF(width,height - rY), new PointF(width,height), new PointF(width - rX,height)});
+                ctx.FillPolygon(new DrawingOptions(), new SolidBrush(Color.FromRgba(0xFF, 0xFF, 0xFF, 0x88)), new PointF[]{new PointF(width - rX,height -rY), new PointF(width,height - rY), new PointF(width,height), new PointF(width - rX,height)});
                 ctx.DrawText($"Copyright © OpenStreetMap Contributors", SystemFonts.CreateFont("Arial", 8, FontStyle.Regular), Color.Black, new PointF(width - rX + rXOffset, height - (rY/2) - (fontSize /2)));
                 
             });
@@ -168,7 +168,7 @@ namespace Jlw.Utilities.OpenMaps
                     {
                         while (sqlResults.Read())
                         {
-                            result = Image.Load((byte[]) sqlResults["ImageData"]);
+                            result = Image.Load<Rgba32>((byte[]) sqlResults["ImageData"]);
                         }
                     }
                 }
